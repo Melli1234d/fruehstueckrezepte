@@ -1,25 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
 
+
+// filename app.js
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<h1 className="text-success">GeeksforGeeks</h1>
+			<div className="bg-info p-5">
+				<p className="">
+					This is example for using button with
+					bootstrap styling
+				</p>
+				<a
+					className="btn btn-primary"
+					data-bs-toggle="collapse"
+					href="#collapseExample"
+					role="button"
+					aria-expanded="false"
+					aria-controls="collapseExample"
+				>
+					Bootstrap button
+				</a>
+			</div>
+		</div>
+	);
 }
 
 export default App;
+
