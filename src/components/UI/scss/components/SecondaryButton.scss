@@ -1,0 +1,18 @@
+$bodytext: #000000;
+$secondaryColor: #28D5EC;
+$color-on-secondary: $bodytext;
+
+
+.secondary-button {
+    text-align: center;
+    background-color: $secondaryColor;
+    color: $color-on-secondary;
+    width: 80%;
+    justify-content: center;
+    display: flex;
+    margin: 2rem auto 2rem auto;
+    font-weight: 800;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 30px;
+}

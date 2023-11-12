@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './../../../css/SecondaryButton/SecondaryButton.css';
+import '../../scss/components/SecondaryButton.scss';
 
 const SecondaryButton = (props) => {
     const classes = 'secondary-button ' + props.className;

@@ -1,0 +1,12 @@
+$lightGrey: #F1F1F1;
+
+.round-button {
+    display: flex;
+    justify-content: center;
+    background-color: $lightGrey;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50px;
+    flex-wrap: wrap;
+    align-content: center;
+}

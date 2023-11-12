@@ -1,7 +1,6 @@
 import React from 'react';
 
-import './../../../css/Roundbutton/Roundbutton.css';
-import './../../../scss/variables.scss';
+import '../../scss/components/RoundButton.scss';
 
 const RoundButton = (props) => {
     const classes = 'round-button ' + props.className;
