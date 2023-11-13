@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import PrimaryButton from './components/UI/components/Buttons/PrimaryButton';
 import SecondaryButton from './components/UI/components/Buttons/SecondaryButton';
 import RoundButton from './components/UI/components/Buttons/Roundbutton';
@@ -66,12 +66,14 @@ function App() {
         <button className={`${category === "Obst" ? "selected" : ""}`}
           		onClick={() => setCategory("Obst")}
         >
-         	Obst
+			<img className="content-center eyecatcher" src={logo} alt=" Icon" height={80} width={80} />
+         	<p className='category-description'>Obst</p>
         </button>
         <button className={`${category === "Dessert" ? "selected" : ""}`}
           		onClick={() => setCategory("Dessert")}
         >
-          	Dessert
+			<img className="content-center eyecatcher" src={logo} alt=" Icon" height={80} width={80} />
+          	<p className='category-description'> Dessert</p>
         </button>
       </div>
     	<button onClick={clearFilters}>
