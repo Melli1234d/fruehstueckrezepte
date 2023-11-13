@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+body {
+  display: flex;
+  justify-content: center;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  margin: 10px 0;
+  border: 1px solid;
+  padding: 10px;
+}
+.category_filter {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0;
+}
+.category_filter button {
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 4px;
+  background-color: white;
+}
+.category_filter button.selected {
+  background-color: wheat;
+}
