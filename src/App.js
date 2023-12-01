@@ -1,20 +1,36 @@
-import logo from './logo.svg';
-import './App.scss';
-import PrimaryButton from './components/UI/components/Buttons/PrimaryButton';
-import SecondaryButton from './components/UI/components/Buttons/SecondaryButton';
-import RoundButton from './components/UI/components/Buttons/Roundbutton';
-import { useState, useEffect } from "react"
-//Bootstrap
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import CategoryFilter from './components/CategoryFilter';
+import React from 'react';
+import {
+	BrowserRouter,
+	Route,
+	Routes,
+  } from 'react-router-dom'
+import Login from "./Pages/Anmelden/Login";
+import Registrieren from "./Pages/Anmelden/Registrieren";
+import Favoriten from "./Pages/Favoriten/Favoriten";
+import Rezepte from "./Pages/Rezepte/Rezepte";
+import DetailRezept from "./Pages/Rezepte/DetailRezept";
+import RezepteSuchen from './Pages/RezeptFindenMitZutaten/RezepteSuchen';
   
-  function App () {
+  
+  
+  function App() {
+
 	return (
-	  <div className="App">
-		<CategoryFilter/>
-	  </div>
+		<div className="app-body">
+			<BrowserRouter>
+				<Routes>
+					<Route index element={<Login/>}/>
+					<Route path="/Login" element={<Login/>}/>
+					<Route path="/Registrieren" element={<Registrieren/>}/>
+					<Route path="/Favoriten" element={<Favoriten/>}/>
+					<Route path="/Rezepte" element={<Rezepte/>}/>
+					<Route path="/DetailRezept" element={<DetailRezept/>}/>
+					<Route path="/RezepteSuchen" element={<RezepteSuchen/>}/>
+				</Routes>
+			</BrowserRouter>
+		</div>
+  
 	);
-  };
+  }
   
   export default App;

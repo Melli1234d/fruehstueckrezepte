@@ -61,6 +61,11 @@ img {
   height: 3rem;
   border-radius: 50px;
 }
+
+.bg-primary {
+  color: #F86800;
+}
+
 .category_filter {
   display: flex;
   gap: 6px;
@@ -70,7 +75,7 @@ img {
   cursor: pointer;
   border: none;
   background-color: white;
-  opacity: 0.2;
+  opacity: 0.6;
 
 }
 .category_filter button.selected {

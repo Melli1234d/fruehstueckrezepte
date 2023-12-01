@@ -1,0 +1,10 @@
+$background: #F86800;
+.background-primary {
+    background-color: $background;
+  }
+  .right-corner img {
+    display: flex;
+    justify-content: end;
+    right: 0;
+    position: absolute;
+  }

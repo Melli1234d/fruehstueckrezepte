@@ -1,0 +1,13 @@
+$white: #ffffff;
+
+.white-tile {
+    width: 100%;
+    border-top-left-radius: 20px;
+    color:black;
+    background-color: $white;
+    height:auto;
+    width: 100%;
+    box-shadow: -1px -5px 5px rgba(#000000, 0.25);
+    bottom: 0;
+    position: absolute;
+}
