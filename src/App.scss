@@ -41,29 +41,17 @@
 
 
 body {
-  display: flex;
   justify-content: center;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
   Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  margin: 10px 0;
-  border: 1px solid;
-  padding: 10px;
+.app-body {
+  padding-bottom: 3rem;
 }
 
-img {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50px;
-}
 
-.bg-primary {
-  color: #F86800;
+.content {
+  padding-top: 4rem;
 }
 
 .category_filter {

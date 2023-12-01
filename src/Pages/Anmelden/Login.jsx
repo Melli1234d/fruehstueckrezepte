@@ -1,5 +1,5 @@
 import React from "react";
-import corner from "../../assets/corner.png";
+import corner from "../../assets/corner.svg";
 import '../../components/UI/scss/pages/login.scss';
 import WhiteTile from "../../components/UI/components/WhiteTile";
 import PrimaryButton from "../../components/UI/components//Buttons/PrimaryButton";

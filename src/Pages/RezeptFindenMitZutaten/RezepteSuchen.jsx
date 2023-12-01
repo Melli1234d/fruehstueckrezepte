@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PrimaryButton from "../../components/UI/components//Buttons/PrimaryButton";
+import corner from "../../assets/corner.svg";
+import '../../App.scss'
 
 //Beispielrezept
 const exampleRecipe = {
@@ -198,8 +200,16 @@ const RezeptSuchen = () => {
 
   return (
     <div>
-      <h1>Rezept Suche</h1>
-      {renderStep()}
+     {currentStep === 1 || currentStep === 2 || currentStep === 4 || currentStep === 5 ? (
+      <div className="right-corner">
+        <img className="cornor-img" src={corner} alt="Icon" height={80} width={120} />
+      </div>
+    ) : null}
+    <div className='content'>
+        <h1>Rezept Suche</h1>
+        {renderStep()}
+    </div>
+      
     </div>
   );
 };

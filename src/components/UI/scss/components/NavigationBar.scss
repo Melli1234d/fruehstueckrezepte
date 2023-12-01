@@ -1,0 +1,37 @@
+/* Navigation.css */
+.navigationbar {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.navigation {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #8F9779;
+    height: 50px;
+  }
+  
+  .navigation a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .navigation a:hover {
+    color: white;
+  }
+  
+  .active {
+    color: white;
+  }
+  
+  
