@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
-import PrimaryButton from "../../components/UI/components//Buttons/PrimaryButton";
+import PrimaryButton from "../../components/UI/components/Buttons/PrimaryButton";
 import corner from "../../assets/corner.svg";
+import Eier from "../../assets/Eier.png";
 import '../../App.scss'
+import '../../components/UI/scss/components/RezepteSuchen.scss'
+import { Popup } from 'reactjs-popup';
 
 //Beispielrezept
 const exampleRecipe = {
   name: 'Kaiserschmarren',
   ingredients: [
-    { name: 'Eier', unit: 'Stück', quantity: 2 },
-    { name: 'Vanillezucker', unit: 'Packung', quantity: 1 },
-    { name: 'Dinkelmehl', unit: 'g', quantity: 95 },
-    { name: 'Zucker', unit: 'EL', quantity: 2 },
-    { name: 'Milch', unit: 'ml', quantity: 135 },
+    { name: 'Eier', unit: 'Stück', quantity: 2, image: 'Eier.jpg' },
+    { name: 'Vanillezucker', unit: 'Packung', quantity: 1, image: '../../assets/corner.svg' },
+    { name: 'Dinkelmehl', unit: 'g', quantity: 95, image: '../../assets/corner.svg' },
+    { name: 'Zucker', unit: 'EL', quantity: 2, image: '../../assets/corner.svg' },
+    { name: 'Milch', unit: 'ml', quantity: 135, image: '../../assets/corner.svg' },
   ],
 };
 
 // Allgemeine Zutatenliste
 const allIngredientsList = [
-    { name: 'Eier', image: 'egg.jpg' },
+    { name: 'Eier', image: '../../assets/corner.svg' },
     { name: 'Vanillezucker', image: 'vanilla.jpg' },
     { name: 'Dinkelmehl', image: 'flour.jpg' },
     { name: 'Zucker', image: 'sugar.jpg' },
@@ -31,6 +34,7 @@ const RezeptSuchen = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [addedIngredients, setAddedIngredients] = useState([]);
+  const [popupOpen, setPopupOpen] = useState(false);
 
 
   //Angezeigte Zutaten
@@ -64,15 +68,20 @@ const RezeptSuchen = () => {
   const addToIngredientsList = () => {
     const quantityInput = document.getElementById('quantityInput');
     const quantity = parseFloat(quantityInput.value) || 0;
-  
-    const updatedIngredients = [
-      ...addedIngredients,
-      { ...selectedIngredient, quantity },
-    ];
-    setAddedIngredients(updatedIngredients);
-    setSelectedIngredient(null);
-    setCurrentStep(2);
-    setSearchQuery('');
+    //nur, wenn die Mengenangabe nicht leer ist
+    if (quantity > 0) {
+      const updatedIngredients = [
+        ...addedIngredients,
+        { ...selectedIngredient, quantity },
+      ];
+      setAddedIngredients(updatedIngredients);
+      setSelectedIngredient(null);
+      setCurrentStep(2);
+      setSearchQuery('');
+    } else {
+      // Zeige eine Fehlermeldung, da keine gültige Menge eingegeben wurde
+      alert('Bitte geben Sie eine gültige Menge ein.');
+    }
   };
 
   const removeIngredient = (index) => {
@@ -81,22 +90,40 @@ const RezeptSuchen = () => {
     setAddedIngredients(updatedIngredients);
   };
 
+
   const findRecipes = () => {
-    const matchingRecipe = checkRecipe(exampleRecipe);
-    setCurrentStep(5);
-    if (!matchingRecipe) {
-      setCurrentStep(5);
+    // Wenn keine Zutaten angegeben wurden, zeige eine Fehlermeldung
+    if (addedIngredients.length === 0) {
+      setPopupOpen(true);
+    } else {
+      // Überprüfe, ob ein Rezept gematcht hat
+      const matchingRecipe = checkRecipe(exampleRecipe);
+  
+      if (matchingRecipe) {
+        setCurrentStep(5);
+      } else {
+        // Wenn kein Rezept gefunden wurde, zeige eine Fehlermeldung oder setze den Schritt auf einen anderen Wert
+        // Hier wird ein Beispiel verwendet, um einen Popup zu öffnen
+        //setPopupOpen(true);
+        setCurrentStep(5);
+      }
     }
   };
 
+
+
+//In dieser Version der Funktion wird überprüft, ob alle benötigten Zutaten (requiredIngredients) in der Liste der hinzugefügten Zutaten vorhanden sind und ob die Mengen ausreichen. 
+//Wenn ja, gibt die Funktion true zurück, andernfalls false.
   const checkRecipe = (recipe) => {
-    return addedIngredients.every(
-      (addedIngredient) =>
-        recipe.ingredients.find(
-          (recipeIngredient) =>
-            recipeIngredient.name === addedIngredient.name &&
-            recipeIngredient.quantity >= addedIngredient.quantity
-        ) !== undefined
+    const requiredIngredients = recipe.ingredients.map((ingredient) => ingredient.name);
+  
+    return requiredIngredients.every((requiredIngredient) =>
+      addedIngredients.some(
+        (addedIngredient) =>
+          addedIngredient.name === requiredIngredient &&
+          addedIngredient.quantity >=
+            recipe.ingredients.find((r) => r.name === requiredIngredient)?.quantity
+      )
     );
   };
 
@@ -105,6 +132,8 @@ const RezeptSuchen = () => {
       case 1:
         return (
           <div>
+            <h1>Rezept Suche</h1>
+            <p> Herzlich willkommen in deiner Küchenzauberwelt! Stehst du vor dem Vorratsschrank und suchst nach kreativen Kochideen? Tauche ein in ein köstliches Abenteuer! Ob Pancakes, Hühnchen oder eine Gemüsepfanne – finde hier das perfekte Rezept für deine Zutaten. Verwandele deine Küche in einen Ort der Genüsse und hab Spaß beim Kochen! Guten Appetit und viel Vergnügen!</p>
             <PrimaryButton onClick={startSearch}>
                 Zutaten finden
             </PrimaryButton>
@@ -113,18 +142,20 @@ const RezeptSuchen = () => {
       case 2:
         return (
           <div>
+            <h1>Zutaten finden</h1>
             <input
               type="text"
+              className='search-field'
               placeholder="Zutaten suchen"
               value={searchQuery}
               onChange={handleSearchInputChange}
             />
             {searchQuery === '' && (
-              <div>
+              <div className="zutatenliste">
                 {/* Standard-Symbole */}
                 {exampleRecipe.ingredients.map((ingredient) => (
                   <div key={ingredient.name} onClick={() => selectIngredient(ingredient)}>
-                    <img src={ingredient.image} alt={ingredient.name} />
+                    <img src={ingredient.image} alt={ingredient.name} height={80} width={120}/>
                     <p>{ingredient.name}</p>
                   </div>
                 ))}
@@ -134,7 +165,7 @@ const RezeptSuchen = () => {
             <div>
               {searchResults.map((ingredient) => (
                 <div key={ingredient.name} onClick={() => selectIngredient(ingredient)}>
-                  <img src={ingredient.image} alt={ingredient.name} />
+                  <img src={ingredient.image} alt={ingredient.name} height={80} width={120}/>
                   <p>{ingredient.name}</p>
                 </div>
               ))}
@@ -161,6 +192,7 @@ const RezeptSuchen = () => {
       case 4:
         return (
           <div>
+             <h1>Rezeptsuche</h1>
             <ul>
               {addedIngredients.map((ingredient, index) => (
                 <li key={index}>
@@ -171,12 +203,22 @@ const RezeptSuchen = () => {
                 </li>
               ))}
             </ul>
-            <PrimaryButton onClick={findRecipes}>Rezept finden</PrimaryButton>
+            {popupOpen ? (
+              <Popup open={popupOpen} closeOnDocumentClick onClose={() => setPopupOpen(false)}>
+                <div className="popup-content">
+                  <p>Please add ingredients before searching for recipes.</p>
+                  <button onClick={() => { setPopupOpen(false); setCurrentStep(2); }}>Close</button>
+                </div>
+              </Popup>
+            ) : (
+              <PrimaryButton onClick={findRecipes}>Rezept finden</PrimaryButton>
+            )}
           </div>
         );
       case 5:
         return (
           <div>
+             <h1>Rezepte</h1>
             {checkRecipe(exampleRecipe) ? (
               <div>
                 <h2>Rezept gefunden: {exampleRecipe.name}</h2>
@@ -198,18 +240,18 @@ const RezeptSuchen = () => {
     }
   };
 
+
+
   return (
     <div>
-     {currentStep === 1 || currentStep === 2 || currentStep === 4 || currentStep === 5 ? (
-      <div className="right-corner">
-        <img className="cornor-img" src={corner} alt="Icon" height={80} width={120} />
-      </div>
-    ) : null}
-    <div className='content'>
-        <h1>Rezept Suche</h1>
-        {renderStep()}
-    </div>
-      
+      {currentStep === 1 || currentStep === 2 || currentStep === 4 || currentStep === 5 ? (
+        <div className="right-corner">
+          <img className="cornor-img" src={corner} alt="Icon" height={80} width={120} />
+        </div>
+      ) : null}
+      <div className='content'>
+          {renderStep()}
+      </div> 
     </div>
   );
 };

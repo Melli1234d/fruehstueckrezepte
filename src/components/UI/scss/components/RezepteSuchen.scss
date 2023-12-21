@@ -1,0 +1,32 @@
+.zutatenliste {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 2rem;
+}
+h1{
+    text-align: center;
+}
+
+p{
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Helvetica;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", 
+    Helvetica, Arial, "Lucida Grande", sans-serif;
+    text-align: center;
+}
+
+.search-field {
+    padding: 0.2rem;
+    width: 100%;
+    background-color: #8F9779;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    padding-left: 2rem;
+
+    &::placeholder {
+        color: rgba( white, 0.6);
+    }
+
+}
